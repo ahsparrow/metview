@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <receiver android:name=".MetViewWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -31,6 +32,6 @@
         </activity>
 
         <service android:name=".MetViewWidget$UpdateIntentService"  />
-    </application>
 
+    </application>
 </manifest>

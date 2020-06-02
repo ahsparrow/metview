@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">MetView</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
+    <string name="temperature_label">Temp (\u00b0C):</string>
+    <string name="wind_label">Wind (mph):</string>
+    <string name="gust_label">Gust (mph):</string>
+    <string name="max_temperature_label">Max. Temp:</string>
+    <string name="min_temperature_label">Min. Temp:</string>
+    <string name="max_gust_label">Max. Gust:</string>
+    <string name="action_refresh">Refresh</string>
 </resources>
