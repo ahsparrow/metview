@@ -1,12 +1,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
 
     <ImageView
-        android:id="@+id/appwidget_image"
+        android:id="@+id/appwidget_image_top"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/example_appwidget_preview" />
+        android:scaleType="fitEnd"
+        android:src="@drawable/example_top" />
+
+    <ImageView
+        android:id="@+id/appwidget_image_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitStart"
+        android:src="@drawable/example_bottom" />
 
 </LinearLayout>

@@ -39,7 +39,7 @@ class MetViewWidget : AppWidgetProvider() {
                 context?.packageName,
                 R.layout.met_view_widget
             ).apply {
-                setOnClickPendingIntent(R.id.appwidget_image, intent)
+                setOnClickPendingIntent(R.id.appwidget_image_top, intent)
             }
 
             // Tell the AppWidgetManager to perform an update on the current app widget
@@ -52,23 +52,27 @@ class MetViewWidget : AppWidgetProvider() {
             Log.v(TAG, "onHandleIntent")
 
             val imageUrl = "http://metcloud.freeflight.org.uk/images/summary"
-            val imageRequest = ImageRequest(
+            val imageRequest1 = ImageRequest(
                 imageUrl,
-                Response.Listener { response ->
+                Response.Listener { bitmap ->
+                    val bitmapTop = Bitmap.createBitmap(bitmap, 0, 0, 512, 256)
+                    val bitmapBottom = Bitmap.createBitmap(bitmap, 0, 256, 512, 256)
+
                     val views = RemoteViews(this.packageName, R.layout.met_view_widget)
-                    views.setImageViewBitmap(R.id.appwidget_image, response)
+                    views.setImageViewBitmap(R.id.appwidget_image_top, bitmapTop)
+                    views.setImageViewBitmap(R.id.appwidget_image_bottom, bitmapBottom)
 
                     val thisWidget = ComponentName(this, MetViewWidget::class.java)
                     val manager = AppWidgetManager.getInstance(this)
                     manager.updateAppWidget(thisWidget, views)
                 },
-                0, 0,  ImageView.ScaleType.FIT_XY, Bitmap.Config.RGB_565,
+                0, 0,null, Bitmap.Config.RGB_565,
                 Response.ErrorListener {}
             )
-            imageRequest.setShouldCache(false)
+            imageRequest1.setShouldCache(false)
 
             val queue = RequestQueueSingleton.getInstance(this).requestQueue
-            queue.add(imageRequest)
+            queue.add(imageRequest1)
         }
     }
 }
