@@ -28,18 +28,24 @@ class MetViewWidget : AppWidgetProvider() {
     ) {
         Log.v(TAG, "onUpdate")
 
-        val intent = Intent(context, UpdateIntentService::class.java)
-            .let { intent ->
-                PendingIntent.getService(context, 0, intent, 0)
+        val refreshIntent = Intent(context, UpdateIntentService::class.java)
+            .let { refreshIntent ->
+                PendingIntent.getService(context, 0, refreshIntent, 0)
             }
-        intent.send()
+        refreshIntent.send()
+
+        val appIntent = Intent(context, MainActivity::class.java)
+            .let { appIntent ->
+                PendingIntent.getActivity(context, 0, appIntent, 0)
+            }
 
         appWidgetIds?.forEach { appWidgetId ->
             val views = RemoteViews(
                 context?.packageName,
                 R.layout.met_view_widget
             ).apply {
-                setOnClickPendingIntent(R.id.appwidget_image_top, intent)
+                setOnClickPendingIntent(R.id.appwidget_image_top, refreshIntent)
+                setOnClickPendingIntent(R.id.appwidget_image_bottom, appIntent)
             }
 
             // Tell the AppWidgetManager to perform an update on the current app widget
